@@ -49,3 +49,52 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+
+
+def movement():
+
+current_room = "outside"
+
+    while current_room != 'q':
+        print(f'You are in {current_room}.')
+        
+        available_direction = 'none'
+
+        if current_room == 'outside':
+            available_direction = 'n'
+        elif current_room == 'foyer':
+            available_direction ='n, s, e'
+        elif current_room == 'overlook':
+            available_direction = 's'
+        elif current_room == 'narrow':
+            available_direction = 'w, n'
+        elif current_room == 'treasure':
+            available_direction = 's'
+
+        decision = input(f'You can go {available_direction}, enter your choice')
+
+        try:
+            decision = str(decision)
+        except ValueError:
+            print('Please enter a correct response')
+            continue
+
+        if current_room == 'outside' and decision == 'n':
+            current_room = 'foyer'
+        elif current_room == 'foyer' and decision == 's':
+            current_room = 'outside'
+        elif current_room == 'foyer' and decision == 'n':
+            current_room = 'overlook'
+        elif current_room == 'foyer' and decision == 'e':
+            current_room = 'outside'    
+        elif current_room == 'overlook' and decision == 's':
+            current_room = 'foyer'
+        elif current_room == 'narrow' and decision == 'w':
+            current_room = 'foyer'
+        elif current_room == 'narrow' and decision == 'n':
+            current_room = 'treasure'
+        elif current_room == 'treasure' and decision == 's':
+            current_room = 'narrow'
+
+        print(f'Moving into the {current_room}')
